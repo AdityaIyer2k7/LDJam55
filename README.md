@@ -22,7 +22,6 @@ git clone https://github.com/AdityaIyer2k7/LDJam55.git
 - Run the following commands:
 
 ```
-git login
 git remote add origin https://github.com/AdityaIyer2k7/LDJam55.git
 git pull origin
 ```
@@ -30,6 +29,7 @@ git pull origin
 - Use this command to enter into your working tree
 
 ```
+git branch workingtree_YOUR_INITIALS_HERE
 git branch --set-upstream-to origin workingtree_YOUR_INITIALS_HERE
 ```
 
@@ -43,5 +43,5 @@ git commit -m "YOUR MESSAGE HERE"
 - To safely push changes, run:
 
 ```
-git push
+git push -u origin workingtree_YOUR_INITIALS_HERE
 ```
