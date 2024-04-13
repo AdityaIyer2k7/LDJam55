@@ -23,14 +23,10 @@ git clone https://github.com/AdityaIyer2k7/LDJam55.git
 
 ```
 git remote add origin https://github.com/AdityaIyer2k7/LDJam55.git
-git pull origin
-```
-
-- Use this command to enter into your working tree
-
-```
 git branch main
-git branch --set-upstream-to origin main
+git switch main
+git branch --set-upstream-to origin/main
+git pull
 ```
 
 - To commit changes, run:
