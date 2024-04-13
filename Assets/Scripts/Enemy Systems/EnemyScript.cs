@@ -1,75 +1,44 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    Vector3Int position;
+    Vector3 position;
     int hitpoints;
     int damage;
     int speed;
     LevelData levelData;
 
-    public void MoveToPlayer()
+    void Update()
     {
-        int delX = GameManager.Instance.playerPos.x - position.x;
-        int delZ = GameManager.Instance.playerPos.z - position.z;
-        Block oldBlock = BlockManager.Instance.GetBlockAt(position), newBlock;
-        if (Math.Abs(delX) > Math.Abs(delZ) & !BlockManager.Instance.GetBlockAt(position+Vector3Int.right*Math.Sign(delX)).hasEnemy)
-        {
-            oldBlock.hasEnemy = false;
-            oldBlock.enemy = null;
-            position = position+Vector3Int.right*Math.Sign(delX);
-            newBlock = BlockManager.Instance.GetBlockAt(position);
-            newBlock.hasEnemy = true;
-            newBlock.enemy = this;
-            if (levelData.canDestoryTrail) {
-                newBlock.hasTrail = false;
-            }
-            if (newBlock.hasPlayer) {
-                GameManager.Instance.Harm(damage);
-                DestroySelf();
-            }
+        transform.forward = GameManager.Instance.transform.position - transform.position;
+        transform.position += transform.forward * speed * Time.deltaTime;
+        Block thisBlock = BlockManager.Instance.GetBlockAt(transform.position);
+        if (levelData.canDestoryFire & thisBlock.hasFire) {
+            thisBlock.hasFire = false;
+            Destroy(thisBlock.fire);
         }
-        else if (!BlockManager.Instance.GetBlockAt(position+Vector3Int.forward*Math.Sign(delZ)).hasEnemy)
-        {
-            oldBlock.hasEnemy = false;
-            oldBlock.enemy = null;
-            position = position+Vector3Int.forward*Math.Sign(delZ);
-            newBlock = BlockManager.Instance.GetBlockAt(position);
-            newBlock.hasEnemy = true;
-            newBlock.enemy = this;
-            if (levelData.canDestoryTrail) {
-                newBlock.hasTrail = false;
-            }
-            if (newBlock.hasPlayer) {
-                GameManager.Instance.Harm(damage);
-                DestroySelf();
-            }
-        }
-        transform.position = position;
     }
 
-    public void DestroySelf()
+    void DestroySelf()
     {
-        EnemyManager.Instance.QueueToKill(this);
-        Block block = BlockManager.Instance.GetBlockAt(position);
-        block.hasEnemy = false;
-        block.enemy = null;
         Destroy(gameObject);
     }
 
-    public void Init(LevelData newLevelData, Vector3Int pos)
+    void OnTriggerEnter(Collider other)
     {
-        position = pos;
-        hitpoints = newLevelData.hitpoints;
-        damage = newLevelData.damage;
-        speed = newLevelData.speed;
-        levelData = newLevelData;
-        EnemyManager.Instance.enemies.Add(this);
-        Block blockAt = BlockManager.Instance.GetBlockAt(pos);
-        blockAt.hasEnemy = true;
-        blockAt.enemy = this;
+        if (other.gameObject.tag == "Player")
+        {
+            GameManager.Instance.Harm(damage);
+            DestroySelf();
+        }
+    }
+
+    public void Init(LevelData levelData, Vector3Int position)
+    {
+        this.position = position;
+        this.levelData = levelData;
+        hitpoints = levelData.hitpoints;
+        damage = levelData.damage;
+        speed = levelData.speed;
     }
 }
