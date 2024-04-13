@@ -10,8 +10,7 @@ public class InputManager : MonoBehaviour
         if (instance != null) return instance;
         InputManager im = FindObjectOfType<InputManager>();
         if (im != null) { instance = im; return im; }
-        GameObject go = new();
-        go.name = "InputManager";
+        GameObject go = new() {name = "InputManager"};
         DontDestroyOnLoad(go);
         instance = go.AddComponent<InputManager>();
         return instance;
@@ -21,7 +20,7 @@ public class InputManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        if (instance != this) Destroy(gameObject);
+        if (instance != null & instance != this) Destroy(gameObject);
         KeyBind[] keyBinds = Resources.LoadAll<KeyBind>("KeyBinds");
         foreach (KeyBind keyBind in keyBinds)
         {
@@ -29,19 +28,19 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public int GetKeyDown(string keyName)
+    public bool GetKeyDown(string keyName)
     {
-        foreach (KeyCode keyCode in keyCodes[keyName]) if (Input.GetKeyDown(keyCode)) return 1;
-        return 0;
+        foreach (KeyCode keyCode in keyCodes[keyName]) if (Input.GetKeyDown(keyCode)) return true;
+        return false;
     }
-    public int GetKeyUp(string keyName)
+    public bool GetKeyUp(string keyName)
     {
-        foreach (KeyCode keyCode in keyCodes[keyName]) if (Input.GetKeyUp(keyCode)) return 1;
-        return 0;
+        foreach (KeyCode keyCode in keyCodes[keyName]) if (Input.GetKeyUp(keyCode)) return true;
+        return false;
     }
-    public int GetKey(string keyName)
+    public bool GetKey(string keyName)
     {
-        foreach (KeyCode keyCode in keyCodes[keyName]) if (Input.GetKey(keyCode)) return 1;
-        return 0;
+        foreach (KeyCode keyCode in keyCodes[keyName]) if (Input.GetKey(keyCode)) return true;
+        return false;
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Windows;
 
-[CreateAssetMenu(fileName="keybind", menuName="New KeyBind")]
+[CreateAssetMenu(fileName="New Keybind", menuName="KeyBind")]
 public class KeyBind : ScriptableObject
 {
     public string identifier;
