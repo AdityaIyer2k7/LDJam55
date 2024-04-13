@@ -15,8 +15,9 @@ public class GameManager : MonoBehaviour
         return instance;
     }}
 
-    public int playerLvl;
-    public Vector3Int playerPos;
+    public int playerLvl = 1;
+    public Vector3Int playerPos = Vector3Int.zero;
+    public bool inSpellMode = false;
 
     [SerializeField]
     float lastTickTime = 0;
@@ -26,7 +27,8 @@ public class GameManager : MonoBehaviour
     int health = 5;
 
     Movement movement;
-    SummonEnemy summonEnemy;
+    TrailSystem trailSystem;
+    EnemySystem enemySystem;
 
     // Start is called before the first frame update
     void Awake()
@@ -34,16 +36,24 @@ public class GameManager : MonoBehaviour
         if (instance != null & instance != this) Destroy(gameObject);
         lastTickTime = Time.time;
         movement = GetComponent<Movement>();
-        summonEnemy = GetComponent<SummonEnemy>();
+        trailSystem = GetComponent<TrailSystem>();
+        enemySystem = GetComponent<EnemySystem>();
     }
 
     void Update()
     {
         if (Time.time - lastTickTime > tickTime) {
-            BlockManager.Instance.GetBlockAt(playerPos).hasPlayer = true;
-            EnemyManager.Instance.Tick();
-            summonEnemy.Tick();
+            /* 1) Player moves
+             * 2) Trails are summoned
+             * 3) Enemies move
+             * 4) Enemies are summoned
+             */
+            BlockManager.Instance.GetBlockAt(playerPos).hasPlayer = false;
             movement.Tick();
+            BlockManager.Instance.GetBlockAt(playerPos).hasPlayer = true;
+            trailSystem.Tick();
+            EnemyManager.Instance.Tick();
+            enemySystem.Tick();
             lastTickTime = Time.time;
         }
     }

@@ -24,6 +24,9 @@ public class EnemyScript : MonoBehaviour
             newBlock = BlockManager.Instance.GetBlockAt(position);
             newBlock.hasEnemy = true;
             newBlock.enemy = this;
+            if (levelData.canDestoryTrail) {
+                newBlock.hasTrail = false;
+            }
             if (newBlock.hasPlayer) {
                 GameManager.Instance.Harm(damage);
                 DestroySelf();
@@ -37,6 +40,9 @@ public class EnemyScript : MonoBehaviour
             newBlock = BlockManager.Instance.GetBlockAt(position);
             newBlock.hasEnemy = true;
             newBlock.enemy = this;
+            if (levelData.canDestoryTrail) {
+                newBlock.hasTrail = false;
+            }
             if (newBlock.hasPlayer) {
                 GameManager.Instance.Harm(damage);
                 DestroySelf();

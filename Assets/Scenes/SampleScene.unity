@@ -426,6 +426,7 @@ GameObject:
   - component: {fileID: 1708542964}
   - component: {fileID: 1708542966}
   - component: {fileID: 1708542965}
+  - component: {fileID: 1708542968}
   - component: {fileID: 1708542967}
   m_Layer: 0
   m_Name: Player
@@ -479,7 +480,8 @@ MonoBehaviour:
   playerLvl: 1
   playerPos: {x: 0, y: 0, z: 0}
   lastTickTime: 0
-  tickTime: 1
+  tickTime: 0.7
+  health: 5
 --- !u!114 &1708542967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,6 +494,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6269b2da1f2a7724cb706ca9f0b2919c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1708542968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708542960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d737925258ed743b9fc2a7dec65927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trailPrefab: {fileID: 3731331342322692312, guid: c1e6867d8b6c15848818e134dcef42ee, type: 3}
 --- !u!1 &1865933886
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,6 +644,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13cf9052cc008524b8558d6e853faabd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemies: []
+  toKill: []
 --- !u!114 &2061396349
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class SummonEnemy : MonoBehaviour
+public class EnemySystem : MonoBehaviour
 {
     int nQueued = 0;
 

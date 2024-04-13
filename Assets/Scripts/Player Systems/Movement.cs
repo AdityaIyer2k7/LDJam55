@@ -27,6 +27,10 @@ public class Movement : MonoBehaviour
     public void Tick()
     {
         GameManager.Instance.playerPos += queuedMove;
+        if (GameManager.Instance.playerPos.x > GameData.gridDims/2) GameManager.Instance.playerPos.x--;
+        if (GameManager.Instance.playerPos.x < -GameData.gridDims/2) GameManager.Instance.playerPos.x++;
+        if (GameManager.Instance.playerPos.z > GameData.gridDims/2) GameManager.Instance.playerPos.z--;
+        if (GameManager.Instance.playerPos.z < -GameData.gridDims/2) GameManager.Instance.playerPos.z++;
         transform.position = GameManager.Instance.playerPos;
         queuedMove = Vector3Int.zero;
     }
