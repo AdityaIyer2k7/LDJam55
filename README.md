@@ -29,8 +29,8 @@ git pull origin
 - Use this command to enter into your working tree
 
 ```
-git branch workingtree_YOUR_INITIALS_HERE
-git branch --set-upstream-to origin workingtree_YOUR_INITIALS_HERE
+git branch main
+git branch --set-upstream-to origin main
 ```
 
 - To commit changes, run:
@@ -40,8 +40,8 @@ git add *
 git commit -m "YOUR MESSAGE HERE"
 ```
 
-- To safely push changes, run:
+- To push changes, run:
 
 ```
-git push -u origin workingtree_YOUR_INITIALS_HERE
+git push
 ```
