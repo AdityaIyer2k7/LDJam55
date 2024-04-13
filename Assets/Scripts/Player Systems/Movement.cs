@@ -22,16 +22,12 @@ public class Movement : MonoBehaviour
         else if (InputManager.Instance.GetKey("BCK")) queuedMove = Vector3Int.back;
         else if (InputManager.Instance.GetKey("LSTRF")) queuedMove = Vector3Int.left;
         else if (InputManager.Instance.GetKey("RSTRF")) queuedMove = Vector3Int.right;
-        else queuedMove = Vector3Int.zero;
     }
 
     public void Tick()
     {
-        PlayerManager.Instance.playerPos = new Vector3Int(
-            Math.Clamp(PlayerManager.Instance.playerPos.x+queuedMove.x, -PlayerManager.Instance.gridDims/2, PlayerManager.Instance.gridDims/2),
-            0,
-            Math.Clamp(PlayerManager.Instance.playerPos.y+queuedMove.y, -PlayerManager.Instance.gridDims/2, PlayerManager.Instance.gridDims/2)
-        );
-        transform.position = PlayerManager.Instance.playerPos;
+        GameManager.Instance.playerPos += queuedMove;
+        transform.position = GameManager.Instance.playerPos;
+        queuedMove = Vector3Int.zero;
     }
 }

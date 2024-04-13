@@ -10,7 +10,8 @@ public class InputManager : MonoBehaviour
         if (instance != null) return instance;
         InputManager im = FindObjectOfType<InputManager>();
         if (im != null) { instance = im; return im; }
-        GameObject go = new() {name = "InputManager"};
+        GameObject go = new();
+        go.name = "InputManager";
         DontDestroyOnLoad(go);
         instance = go.AddComponent<InputManager>();
         return instance;

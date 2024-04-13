@@ -7,16 +7,10 @@ public class SummonEnemy : MonoBehaviour
 {
     int nQueued = 0;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
-        if (InputManager.Instance.GetKeyDown("SUMMON") & nQueued < PlayerManager.Instance.playerLvl+1)
+        if (InputManager.Instance.GetKeyDown("SUMMON") & nQueued < GameManager.Instance.playerLvl+1)
         {
             nQueued += 1;
         }
@@ -37,23 +31,25 @@ public class SummonEnemy : MonoBehaviour
         {
             foreach (LevelData levelData in enemyType.levelData)
             {
-                if (PlayerManager.Instance.playerLvl <= CalcPow(levelData) &
-                    CalcPow(levelData) <= 2*PlayerManager.Instance.playerLvl) valid.Add(levelData);
+                if (GameManager.Instance.playerLvl <= CalcPow(levelData) &
+                    CalcPow(levelData) <= 2*GameManager.Instance.playerLvl) valid.Add(levelData);
             }
         }
+        List<Block> openBlocks =  BlockManager.Instance.GetBorderBlocksOfType(new Block(){hasEnemy=false,hasTrail=false});
+        List<Vector3Int> openSquares = new();
+        foreach (Block openBlock in openBlocks) openSquares.Add(openBlock.position);
         LevelData enemyToSpawn;
-        List<Block> openSquares; // Improve code
         Vector3Int openSquare;
         GameObject enemy;
         EnemyScript enemyScript;
         for (int i = 0; i < nQueued; i++)
         {
             enemyToSpawn = valid[UnityEngine.Random.Range(0, valid.Count)];
-            openSquares = BlockManager.Instance.GetBorderBlocksOfType(new Block(){hasEnemy=false,hasTrail=false});
-            openSquare = openSquares[UnityEngine.Random.Range(0, openSquares.Count)].position;
+            openSquare = openSquares[UnityEngine.Random.Range(0, openSquares.Count)];
+            openSquares.Remove(openSquare);
             enemy = Instantiate(enemyToSpawn.prefab, openSquare, Quaternion.identity, EnemyManager.Instance.transform);
             enemyScript = enemy.AddComponent<EnemyScript>();
-            enemyScript.Init(enemyToSpawn);
+            enemyScript.Init(enemyToSpawn, openSquare);
         }
         nQueued = 0;
     }
