@@ -59,15 +59,17 @@ public class BlockManager : MonoBehaviour
     public List<Block> GetBorderBlocks()
     {
         List<Block> borderBlocks = new();
-        for (int x = 0; x < GameData.gridDims+GameData.visibleSz; x++)
+        int playerIntPosX = Mathf.RoundToInt(GameManager.Instance.playerPos.x);
+        int playerIntPosZ = Mathf.RoundToInt(GameManager.Instance.playerPos.z);
+        for (int x = playerIntPosX-GameData.visibleSz/2; x < 1+playerIntPosX+GameData.visibleSz/2; x++)
         {
-            borderBlocks.Add(blockGrid[x,0]);
-            borderBlocks.Add(blockGrid[x,GameData.gridDims+GameData.visibleSz-1]);
+            borderBlocks.Add(GetBlockAt(x, playerIntPosZ-GameData.visibleSz/2));
+            borderBlocks.Add(GetBlockAt(x, playerIntPosZ+GameData.visibleSz/2));
         }
-        for (int y = 1; y < GameData.gridDims+GameData.visibleSz-1; y++)
+        for (int z = 1+playerIntPosZ-GameData.visibleSz/2; z < playerIntPosZ+GameData.visibleSz/2; z++)
         {
-            borderBlocks.Add(blockGrid[0,y]);
-            borderBlocks.Add(blockGrid[GameData.gridDims+GameData.visibleSz-1,y]);
+            borderBlocks.Add(GetBlockAt(playerIntPosX-GameData.visibleSz/2, z));
+            borderBlocks.Add(GetBlockAt(playerIntPosX+GameData.visibleSz/2, z));
         }
         return borderBlocks;
     }

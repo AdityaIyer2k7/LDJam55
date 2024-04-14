@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
         return instance;
     }}
 
+    public Vector3 playerPos = Vector3.zero;
     public int playerLvl = 1;
     public bool inSpellMode = false;
 
