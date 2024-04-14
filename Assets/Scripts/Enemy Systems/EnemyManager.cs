@@ -30,7 +30,7 @@ public class EnemyManager : MonoBehaviour
 
     public void Wave()
     {
-        int nQueued = GameManager.Instance.playerLvl*Random.Range(0,6);
+        int nQueued = GameManager.Instance.playerLvl*Random.Range(0,2);
         if (nQueued <= 0) return;
         Enemy[] enemyTypes = Resources.LoadAll<Enemy>("Enemies");
         List<LevelData> valid = new();

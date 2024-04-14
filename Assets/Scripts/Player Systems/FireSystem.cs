@@ -7,7 +7,7 @@ public class FireSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InputManager.Instance.GetKeyDown("TRAIL"))
+        if (InputManager.Instance.GetKey("TRAIL"))
         {
             Block thisBlock = BlockManager.Instance.GetBlockAt(transform.position+transform.forward);
             if (thisBlock.hasFire) return;

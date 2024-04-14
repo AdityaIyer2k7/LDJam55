@@ -9,7 +9,7 @@ public class Movement : MonoBehaviour
 {
     public float speed;
     public float turnSpeed;
-    public Transform particleSystems;
+    public new ParticleSystem particleSystem;
 
     // Update is called once per frame
     void Update()
@@ -20,7 +20,8 @@ public class Movement : MonoBehaviour
         ).normalized;
         float delta = Input.GetAxis("Mouse X") * turnSpeed * Time.deltaTime;
         transform.RotateAround(transform.position, Vector3.up, delta);
-        particleSystems.position = transform.position;
+        ParticleSystem.ShapeModule shape = particleSystem.shape;
+        shape.position = new Vector3(transform.position.x, -transform.position.z, 1);
         GameManager.Instance.playerPos = transform.position;
     }
 }

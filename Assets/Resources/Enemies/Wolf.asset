@@ -17,16 +17,16 @@ MonoBehaviour:
   levelData:
   - hitpoints: 1
     damage: 1
-    speed: 1
+    speed: 2
     canDestoryFire: 0
-    prefab: {fileID: 8082275914244173070, guid: 30961b99255b8054eb7c9c929a3d8dfb, type: 3}
+    prefab: {fileID: 4559339202193472017, guid: d357e87fb868dd74e814031ab8cffc5c, type: 3}
   - hitpoints: 2
     damage: 1
-    speed: 1
-    canDestoryFire: 1
-    prefab: {fileID: 8082275914244173070, guid: 30961b99255b8054eb7c9c929a3d8dfb, type: 3}
+    speed: 2
+    canDestoryFire: 0
+    prefab: {fileID: 4559339202193472017, guid: d357e87fb868dd74e814031ab8cffc5c, type: 3}
   - hitpoints: 2
     damage: 2
-    speed: 1
-    canDestoryFire: 1
-    prefab: {fileID: 8082275914244173070, guid: 30961b99255b8054eb7c9c929a3d8dfb, type: 3}
+    speed: 2
+    canDestoryFire: 0
+    prefab: {fileID: 4559339202193472017, guid: d357e87fb868dd74e814031ab8cffc5c, type: 3}
