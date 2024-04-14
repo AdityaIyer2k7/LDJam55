@@ -33,6 +33,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (inSpellMode)
+        {
+            lastWaveTime = Time.time;
+        }
         if (Time.time - lastWaveTime > waveTime)
         {
             EnemyManager.Instance.Wave();

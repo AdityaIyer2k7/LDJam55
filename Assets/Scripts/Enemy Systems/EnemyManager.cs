@@ -56,7 +56,7 @@ public class EnemyManager : MonoBehaviour
             openSquares.Remove(openSquare);
             enemy = Instantiate(enemyToSpawn.prefab, openSquare, Quaternion.identity, transform);
             enemyScript = enemy.AddComponent<EnemyScript>();
-            enemyScript.Init(enemyToSpawn, openSquare);
+            enemyScript.Init(enemyToSpawn);
         }
     }
 }

@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    Vector3 position;
     int hitpoints;
     int damage;
     int speed;
@@ -10,6 +9,7 @@ public class EnemyScript : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.inSpellMode) return;
         transform.forward = GameManager.Instance.transform.position - transform.position;
         transform.position += transform.forward * speed * Time.deltaTime;
         Block thisBlock = BlockManager.Instance.GetBlockAt(transform.position);
@@ -33,9 +33,8 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    public void Init(LevelData levelData, Vector3Int position)
+    public void Init(LevelData levelData)
     {
-        this.position = position;
         this.levelData = levelData;
         hitpoints = levelData.hitpoints;
         damage = levelData.damage;
