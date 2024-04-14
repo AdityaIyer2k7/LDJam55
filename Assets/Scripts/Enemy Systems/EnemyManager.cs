@@ -16,21 +16,47 @@ public class EnemyManager : MonoBehaviour
         return instance;
     }}
 
-    public List<EnemyScript> enemies = new();
-    public List<EnemyScript> toKill = new();
-
     // Start is called before the first frame update
     void Awake()
     {
         if (instance != null & instance != this) Destroy(gameObject);
     }
 
-    public void Tick()
+    float CalcPow(LevelData levelData)
     {
-        foreach (EnemyScript enemy in enemies) enemy.MoveToPlayer();
-        foreach (EnemyScript enemy in toKill) enemies.Remove(enemy);
-        toKill.Clear();
+        // Power = Damage by enemy + Crystals needed to defeat * 0.2*Speed + 1 if canDestroyFire - 1
+        return levelData.damage + 0.2f*levelData.hitpoints*levelData.speed + (levelData.canDestoryFire ? 1 : 0) - 1;
     }
 
-    public void QueueToKill(EnemyScript enemy) { toKill.Add(enemy); }
+    public void Wave()
+    {
+        int nQueued = GameManager.Instance.playerLvl*Random.Range(0,6);
+        if (nQueued <= 0) return;
+        Enemy[] enemyTypes = Resources.LoadAll<Enemy>("Enemies");
+        List<LevelData> valid = new();
+        foreach (Enemy enemyType in enemyTypes)
+        {
+            foreach (LevelData levelData in enemyType.levelData)
+            {
+                if (GameManager.Instance.playerLvl <= CalcPow(levelData) &
+                    CalcPow(levelData) <= 2*GameManager.Instance.playerLvl) valid.Add(levelData);
+            }
+        }
+        List<Block> openBlocks =  BlockManager.Instance.GetBorderBlocks();
+        List<Vector3Int> openSquares = new();
+        foreach (Block openBlock in openBlocks) openSquares.Add(openBlock.position);
+        LevelData enemyToSpawn;
+        Vector3Int openSquare;
+        GameObject enemy;
+        EnemyScript enemyScript;
+        for (int i = 0; i < nQueued; i++)
+        {
+            enemyToSpawn = valid[Random.Range(0, valid.Count)];
+            openSquare = openSquares[Random.Range(0, openSquares.Count)];
+            openSquares.Remove(openSquare);
+            enemy = Instantiate(enemyToSpawn.prefab, openSquare, Quaternion.identity, transform);
+            enemyScript = enemy.AddComponent<EnemyScript>();
+            enemyScript.Init(enemyToSpawn, openSquare);
+        }
+    }
 }

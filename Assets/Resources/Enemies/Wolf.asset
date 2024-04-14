@@ -18,15 +18,15 @@ MonoBehaviour:
   - hitpoints: 1
     damage: 1
     speed: 1
-    canDestoryTrail: 0
+    canDestoryFire: 0
     prefab: {fileID: 8082275914244173070, guid: 30961b99255b8054eb7c9c929a3d8dfb, type: 3}
   - hitpoints: 2
     damage: 1
     speed: 1
-    canDestoryTrail: 0
+    canDestoryFire: 1
     prefab: {fileID: 8082275914244173070, guid: 30961b99255b8054eb7c9c929a3d8dfb, type: 3}
   - hitpoints: 2
     damage: 2
     speed: 1
-    canDestoryTrail: 0
+    canDestoryFire: 1
     prefab: {fileID: 8082275914244173070, guid: 30961b99255b8054eb7c9c929a3d8dfb, type: 3}

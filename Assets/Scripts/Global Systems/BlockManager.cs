@@ -5,10 +5,8 @@ using UnityEngine;
 public class Block
 {
     public Vector3Int position;
-    public bool hasPlayer;
-    public bool hasEnemy;
-    public EnemyScript enemy;
-    public bool hasTrail;
+    public bool hasFire;
+    public GameObject fire;
 }
 
 public class BlockManager : MonoBehaviour
@@ -34,21 +32,21 @@ public class BlockManager : MonoBehaviour
         if (instance != null & instance != this) Destroy(gameObject);
         blockGrid = new Block[GameData.gridDims+GameData.visibleSz,GameData.gridDims+GameData.visibleSz];
         for (int i=0; i<GameData.gridDims+GameData.visibleSz; i++)
+        {
             for (int j=0; j<GameData.gridDims+GameData.visibleSz; j++)
+            {
                 blockGrid[i,j] = new Block() {position = new Vector3Int(
                     i-(GameData.gridDims+GameData.visibleSz)/2,
                     0,
                     j-(GameData.gridDims+GameData.visibleSz)/2
                 )};
+            }
+        }
     }
 
-    public Block GetBlockAt(Vector3Int pos)
-    {
-        return blockGrid[
-            pos.x+(GameData.gridDims+GameData.visibleSz)/2,
-            pos.z+(GameData.gridDims+GameData.visibleSz)/2
-        ];
-    }
+    public Block GetBlockAt(Vector3 pos) { return GetBlockAt(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.z)); }
+
+    public Block GetBlockAt(Vector3Int pos) { return GetBlockAt(pos.x, pos.z); }
 
     public Block GetBlockAt(int x, int z)
     {
@@ -58,36 +56,21 @@ public class BlockManager : MonoBehaviour
         ];
     }
 
-    public List<Block> GetBlocksOfType(Block reference)
+    public List<Block> GetBorderBlocks()
     {
-        List<Block> blocks = new();
-        Block block;
-        for (int i = -GameData.visibleSz/2; i < 1+GameData.visibleSz/2; i++)
+        List<Block> borderBlocks = new();
+        int playerIntPosX = Mathf.RoundToInt(GameManager.Instance.playerPos.x);
+        int playerIntPosZ = Mathf.RoundToInt(GameManager.Instance.playerPos.z);
+        for (int x = playerIntPosX-GameData.visibleSz/2; x < 1+playerIntPosX+GameData.visibleSz/2; x++)
         {
-            for (int j = -GameData.visibleSz/2; j < 1+GameData.visibleSz/2; j++)
-            {
-                block = GetBlockAt(
-                    i+GameManager.Instance.playerPos.x,
-                    j+GameManager.Instance.playerPos.z
-                );
-                if (block.hasEnemy==reference.hasEnemy & block.hasPlayer==reference.hasPlayer & block.hasTrail==reference.hasTrail)
-                {
-                    if (!block.hasEnemy || (block.hasEnemy & block.enemy==reference.enemy)) blocks.Add(block);
-                }
-            }
+            borderBlocks.Add(GetBlockAt(x, playerIntPosZ-GameData.visibleSz/2));
+            borderBlocks.Add(GetBlockAt(x, playerIntPosZ+GameData.visibleSz/2));
         }
-        return blocks;
-    }
-
-    public List<Block> GetBorderBlocksOfType(Block reference)
-    {
-        List<Block> blocks = new();
-        List<Block> allBlocks = GetBlocksOfType(reference);
-        foreach (Block block in allBlocks)
+        for (int z = 1+playerIntPosZ-GameData.visibleSz/2; z < playerIntPosZ+GameData.visibleSz/2; z++)
         {
-            if (Math.Abs(block.position.x-GameManager.Instance.playerPos.x)==GameData.visibleSz/2 ||
-                Math.Abs(block.position.z-GameManager.Instance.playerPos.z)==GameData.visibleSz/2) blocks.Add(block);
+            borderBlocks.Add(GetBlockAt(playerIntPosX-GameData.visibleSz/2, z));
+            borderBlocks.Add(GetBlockAt(playerIntPosX+GameData.visibleSz/2, z));
         }
-        return blocks;
+        return borderBlocks;
     }
 }
