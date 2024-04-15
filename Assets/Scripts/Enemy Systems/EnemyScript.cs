@@ -2,10 +2,16 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
+    GameObject deathParticles;
     int hitpoints;
     int damage;
     int speed;
     LevelData levelData;
+
+    void Start()
+    {
+        deathParticles = Resources.Load<GameObject>("Prefabs/Death/DeathParticles.asset");
+    }
 
     void Update()
     {
@@ -19,8 +25,15 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
+    void Harm(int damage)
+    {
+        hitpoints -= damage;
+        if (hitpoints <= 0) DestroySelf();
+    }
+
     void DestroySelf()
     {
+        Instantiate(deathParticles, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
@@ -30,6 +43,13 @@ public class EnemyScript : MonoBehaviour
         {
             GameManager.Instance.Harm(damage);
             DestroySelf();
+        }
+        if (other.gameObject.tag == "Structure")
+        {
+            SpellStructure structure = other.gameObject.GetComponent<SpellStructure>();
+            bool toDestroySelf = structure.health >= damage;
+            structure.Harm(damage);
+            if (toDestroySelf) DestroySelf();
         }
     }
 

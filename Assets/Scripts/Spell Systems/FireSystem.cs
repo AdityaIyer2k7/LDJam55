@@ -9,7 +9,7 @@ public class FireSystem : MonoBehaviour
     {
         if (InputManager.Instance.GetKey("TRAIL"))
         {
-            Block thisBlock = BlockManager.Instance.GetBlockAt(transform.position+transform.forward);
+            Block thisBlock = BlockManager.Instance.GetBlockAt(transform.position);
             if (thisBlock.hasFire) return;
             GameObject fire = Instantiate(firePrefab, thisBlock.position, Quaternion.identity);
             thisBlock.hasFire = true;

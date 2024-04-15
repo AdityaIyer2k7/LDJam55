@@ -22,7 +22,7 @@ public class Movement : MonoBehaviour
         float delta = Input.GetAxis("Mouse X") * turnSpeed * Time.deltaTime;
         transform.RotateAround(transform.position, Vector3.up, delta);
         ParticleSystem.ShapeModule shape = particleSystem.shape;
-        shape.position = new Vector3(transform.position.x, -transform.position.z, 1);
+        shape.position = new Vector3(transform.position.x, -transform.position.z, 0);
         GameManager.Instance.playerPos = transform.position;
     }
 }
