@@ -27,7 +27,7 @@ public class EnemyManager : MonoBehaviour
     float CalcPow(LevelData levelData)
     {
         // Power = Damage by enemy + Crystals needed to defeat * 0.2*Speed + 1 if canDestroyFire - 1
-        return levelData.damage + 0.2f*levelData.hitpoints*levelData.speed + (levelData.canDestoryFire ? 1 : 0) - 1;
+        return levelData.damage + 0.2f*levelData.hitpoints*levelData.speed;
     }
 
     public void Wave()
