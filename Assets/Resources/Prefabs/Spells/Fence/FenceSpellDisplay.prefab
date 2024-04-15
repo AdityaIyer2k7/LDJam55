@@ -115,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5819547000607834141}
   m_Layer: 0
-  m_Name: WallSpellDisplay
+  m_Name: FenceSpellDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

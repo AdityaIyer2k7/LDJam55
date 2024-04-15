@@ -62,15 +62,18 @@ public class SpellCastSystem : MonoBehaviour
     {
         if (!GameManager.Instance.inSpellMode)
         {
-            if (InputManager.Instance.GetKeyDown("SPELL1"))
+            bool triedCast = false;
+            int spellIndex = 0;
+            if (InputManager.Instance.GetKeyDown("SPELL1")) { triedCast = true; spellIndex = 1; }
+            if (InputManager.Instance.GetKeyDown("SPELL2")) { triedCast = true; spellIndex = 2; }
+            if (triedCast)
             {
-                activeSpell = indexedSpells[1];
+                activeSpell = indexedSpells[spellIndex];
                 activeSelectPrefab = Instantiate(activeSpell.displayPrefab);
                 GameManager.Instance.inSpellMode = true;
                 camera.transform.localPosition = Vector3.up*H;
                 camera.transform.localRotation = Quaternion.Euler(90,0,0);
                 camera.orthographic = true;
-                
             }
         }
         else

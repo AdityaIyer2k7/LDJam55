@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2c798659525e754fa75abcf949e8d59, type: 3}
+  m_Name: fireball
+  m_EditorClassIdentifier: 
+  name: Fireball
+  index: 1
+  levelNeeded: 1
+  blocksNeeded:
+  - {x: 0, y: 0, z: 0}
+  displayPrefab: {fileID: 1303971159014647914, guid: 1275ab3799c35ff4c8f87b9076cf62fd, type: 3}
+  spellPrefab: {fileID: 2194058414537287519, guid: 1e5f9844b9e5749458d8cd34f2a50751, type: 3}

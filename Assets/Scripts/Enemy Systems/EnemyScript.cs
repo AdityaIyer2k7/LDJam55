@@ -10,7 +10,7 @@ public class EnemyScript : MonoBehaviour
 
     void Start()
     {
-        deathParticles = Resources.Load<GameObject>("Prefabs/Death/DeathParticles.asset");
+        deathParticles = Resources.Load<GameObject>("Prefabs/Death/DeathParticles");
     }
 
     void Update()

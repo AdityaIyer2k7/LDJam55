@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2c798659525e754fa75abcf949e8d59, type: 3}
-  m_Name: Wall
+  m_Name: fence
   m_EditorClassIdentifier: 
-  name: Summon Wall
-  index: 1
+  name: Fence
+  index: 2
   levelNeeded: 1
   blocksNeeded:
   - {x: 0, y: 0, z: 0}
@@ -21,4 +21,4 @@ MonoBehaviour:
   - {x: 1, y: 0, z: 0}
   - {x: 1, y: 0, z: 1}
   displayPrefab: {fileID: 5931994782867154176, guid: 3c9fa57a306f5c54eae300513c781f69, type: 3}
-  spellPrefab: {fileID: 2194058414537287519, guid: 1e5f9844b9e5749458d8cd34f2a50751, type: 3}
+  spellPrefab: {fileID: 8058617799394677144, guid: 9c96e166ba83862458897c67c27d04aa, type: 3}
