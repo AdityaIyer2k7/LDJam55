@@ -32,7 +32,7 @@ public class EnemyManager : MonoBehaviour
 
     public void Wave()
     {
-        int nQueued = GameManager.Instance.playerLvl*Random.Range(0,2);
+        int nQueued = Mathf.RoundToInt(GameManager.Instance.playerLvl*Random.Range(0f,2f));
         if (nQueued <= 0) return;
         Enemy[] enemyTypes = Resources.LoadAll<Enemy>("Enemies");
         List<LevelData> valid = new();
@@ -40,7 +40,7 @@ public class EnemyManager : MonoBehaviour
         {
             foreach (LevelData levelData in enemyType.levelData)
             {
-                if (GameManager.Instance.playerLvl <= CalcPow(levelData) &
+                if (0.5*GameManager.Instance.playerLvl <= CalcPow(levelData) &
                     CalcPow(levelData) <= 2*GameManager.Instance.playerLvl) valid.Add(levelData);
             }
         }

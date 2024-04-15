@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
@@ -33,6 +34,8 @@ public class EnemyScript : MonoBehaviour
 
     void DestroySelf()
     {
+        GameManager.Instance.mana = Math.Min(GameManager.Instance.mana+20, 100);
+        GameManager.Instance.xp += 1;
         EnemyManager.Instance.enemyScripts.Remove(this);
         Instantiate(deathParticles, transform.position, Quaternion.identity);
         Destroy(gameObject);
