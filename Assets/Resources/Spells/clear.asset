@@ -10,15 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2c798659525e754fa75abcf949e8d59, type: 3}
-  m_Name: trap
+  m_Name: clear
   m_EditorClassIdentifier: 
-  name: Trap
-  index: 3
+  name: Clear
+  index: 4
   blocksNeeded:
   - {x: 0, y: 0, z: 0}
+  - {x: -1, y: 0, z: -1}
   - {x: -1, y: 0, z: 0}
-  - {x: 1, y: 0, z: 0}
-  - {x: 0, y: 0, z: -1}
+  - {x: -1, y: 0, z: 1}
   - {x: 0, y: 0, z: 1}
-  displayPrefab: {fileID: 5931994782867154176, guid: fa380d7e02d2db944a3334288693d3a8, type: 3}
-  spellPrefab: {fileID: 8970505637009129490, guid: 14165b7d12b9a6942b08a1789652c4bc, type: 3}
+  - {x: 1, y: 0, z: 1}
+  - {x: 1, y: 0, z: 0}
+  - {x: 1, y: 0, z: -1}
+  - {x: 0, y: 0, z: -1}
+  - {x: 0, y: 0, z: -2}
+  - {x: -2, y: 0, z: 0}
+  - {x: 0, y: 0, z: 2}
+  - {x: 2, y: 0, z: 0}
+  displayPrefab: {fileID: 5931994782867154176, guid: 5a3baa60ecc51bf4cbe4b9f54ea8eab4, type: 3}
+  spellPrefab: {fileID: 2194058414537287519, guid: 8799cbd3ff7c88c41a4401988b5c2657, type: 3}

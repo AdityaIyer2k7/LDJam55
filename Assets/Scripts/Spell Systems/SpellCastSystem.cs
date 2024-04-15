@@ -73,7 +73,6 @@ public class SpellCastSystem : MonoBehaviour
             if (InputManager.Instance.GetKeyDown("SPELL2")) { triedCast = true; spellIndex = 2; }
             if (InputManager.Instance.GetKeyDown("SPELL3")) { triedCast = true; spellIndex = 3; }
             if (InputManager.Instance.GetKeyDown("SPELL4")) { triedCast = true; spellIndex = 4; }
-            if (InputManager.Instance.GetKeyDown("SPELL5")) { triedCast = true; spellIndex = 5; }
             if (triedCast)
             {
                 activeSpell = indexedSpells[spellIndex];
