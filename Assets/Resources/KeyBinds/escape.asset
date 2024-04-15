@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be1213c4cdbc57543a88b722d697d4e4, type: 3}
   m_Name: escape
   m_EditorClassIdentifier: 
-  identifier: TRAIL
-  keyCodes: 300100002f010000
+  identifier: ESC
+  keyCodes: 1b000000
