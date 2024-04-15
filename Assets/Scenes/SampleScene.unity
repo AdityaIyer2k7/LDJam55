@@ -5367,7 +5367,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.01
+  near clip plane: 0.09
   far clip plane: 1000
   field of view: 64
   orthographic: 0
@@ -20760,6 +20760,7 @@ GameObject:
   - component: {fileID: 1708542968}
   - component: {fileID: 1708542970}
   - component: {fileID: 1708542969}
+  - component: {fileID: 1708542971}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -20880,6 +20881,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!95 &1708542971
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708542960}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c8316821867f68f42af695f0ddea23d5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1766860017
 GameObject:
   m_ObjectHideFlags: 0
@@ -21181,7 +21203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 419817420}
-  H: 2
+  H: 5
 --- !u!4 &3062899466054697546
 Transform:
   m_ObjectHideFlags: 0

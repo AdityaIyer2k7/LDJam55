@@ -5,7 +5,7 @@ public class EnemyScript : MonoBehaviour
     GameObject deathParticles;
     int hitpoints;
     int damage;
-    int speed;
+    float speed;
     LevelData levelData;
 
     void Start()
@@ -33,11 +33,12 @@ public class EnemyScript : MonoBehaviour
 
     void DestroySelf()
     {
+        EnemyManager.Instance.enemyScripts.Remove(this);
         Instantiate(deathParticles, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Player")
         {
@@ -59,5 +60,6 @@ public class EnemyScript : MonoBehaviour
         hitpoints = levelData.hitpoints;
         damage = levelData.damage;
         speed = levelData.speed;
+        EnemyManager.Instance.enemyScripts.Add(this);
     }
 }

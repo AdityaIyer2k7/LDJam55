@@ -6,7 +6,7 @@ public class LevelData
 {
     public int hitpoints = 1;
     public int damage = 1;
-    public int speed = 1;
+    public float speed = 1;
     public bool canDestoryFire = false;
     public GameObject prefab;
 }

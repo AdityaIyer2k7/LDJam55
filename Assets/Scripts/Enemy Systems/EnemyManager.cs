@@ -16,6 +16,8 @@ public class EnemyManager : MonoBehaviour
         return instance;
     }}
 
+    public List<EnemyScript> enemyScripts = new();
+
     // Start is called before the first frame update
     void Awake()
     {

@@ -11,14 +11,27 @@ public class Movement : MonoBehaviour
     public float turnSpeed;
     public new ParticleSystem particleSystem;
 
+    Animator animator;
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.inSpellMode) return;
-        transform.position += Time.deltaTime*speed*(
+        if (GameManager.Instance.inSpellMode) { animator.SetBool("isWalking", false); return; }
+        Vector3 delPos = (
             transform.forward * ((InputManager.Instance.GetKey("FWD") ? 1 : 0) - (InputManager.Instance.GetKey("BCK") ? 1 : 0)) +
             transform.right * ((InputManager.Instance.GetKey("RSTRF") ? 1 : 0) - (InputManager.Instance.GetKey("LSTRF") ? 1 : 0))
-        ).normalized;
+        );
+        if (delPos.sqrMagnitude >= 0.5)
+        {
+            transform.position += Time.deltaTime*speed*delPos.normalized;
+            animator.SetBool("isWalking", true);
+        }
+        else animator.SetBool("isWalking", false);
         float delta = Input.GetAxis("Mouse X") * turnSpeed * Time.deltaTime;
         transform.RotateAround(transform.position, Vector3.up, delta);
         ParticleSystem.ShapeModule shape = particleSystem.shape;
