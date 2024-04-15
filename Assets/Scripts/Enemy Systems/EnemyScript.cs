@@ -25,7 +25,7 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    void Harm(int damage)
+    public void Harm(int damage)
     {
         hitpoints -= damage;
         if (hitpoints <= 0) DestroySelf();

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -15,15 +16,22 @@ public class GameManager : MonoBehaviour
         return instance;
     }}
 
-    public Vector3 playerPos = Vector3.zero;
-    public int playerLvl = 1;
     public bool inSpellMode = false;
-
-    public float lastWaveTime = 0;
     public float waveTime = 15;
+    public float manaTime = 0.2f; // Time to refil 1 mana point
+    public int mana = 0;
+    public int xp = 0;
+
+    public int playerLvl { get {
+        return Mathf.FloorToInt(xp/10);
+    } }
+    
+    public Vector3 playerPos = Vector3.zero;
 
     [SerializeField]
     int health = 5;
+    float lastWaveTime = 0;
+    float lastManaTime = 0;
 
     // Start is called before the first frame update
     void Awake()
@@ -33,9 +41,11 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (inSpellMode)
+        if (inSpellMode) { lastWaveTime = lastManaTime = Time.time; }
+        if (Time.time - lastManaTime > manaTime)
         {
-            lastWaveTime = Time.time;
+            mana += 1;
+            lastManaTime = Time.time;
         }
         if (Time.time - lastWaveTime > waveTime)
         {

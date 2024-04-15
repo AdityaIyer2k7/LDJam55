@@ -44,11 +44,8 @@ public class SpellCastSystem : MonoBehaviour
         }
     }
 
-    void TryCast(Vector3 pos)
+    void BreakCast()
     {
-        if (!TestCast(pos)) return;
-        BreakFires(pos);
-        Instantiate(activeSpell.spellPrefab, activeSelectPrefab.transform.position, Quaternion.identity);
         Destroy(activeSelectPrefab);
         activeSelectPrefab = null;
         activeSpell = null;
@@ -56,6 +53,14 @@ public class SpellCastSystem : MonoBehaviour
         camera.transform.localPosition = Vector3.up*0.5f;
         camera.transform.localRotation = Quaternion.Euler(15,0,0);
         camera.orthographic = false;
+    }
+
+    void TryCast(Vector3 pos)
+    {
+        if (!TestCast(pos)) return;
+        BreakFires(pos);
+        Instantiate(activeSpell.spellPrefab, activeSelectPrefab.transform.position, Quaternion.identity);
+        BreakCast();
     }
 
     void Update()
@@ -66,6 +71,9 @@ public class SpellCastSystem : MonoBehaviour
             int spellIndex = 0;
             if (InputManager.Instance.GetKeyDown("SPELL1")) { triedCast = true; spellIndex = 1; }
             if (InputManager.Instance.GetKeyDown("SPELL2")) { triedCast = true; spellIndex = 2; }
+            if (InputManager.Instance.GetKeyDown("SPELL3")) { triedCast = true; spellIndex = 3; }
+            if (InputManager.Instance.GetKeyDown("SPELL4")) { triedCast = true; spellIndex = 4; }
+            if (InputManager.Instance.GetKeyDown("SPELL5")) { triedCast = true; spellIndex = 5; }
             if (triedCast)
             {
                 activeSpell = indexedSpells[spellIndex];
@@ -80,6 +88,7 @@ public class SpellCastSystem : MonoBehaviour
         {
             Vector3 pos = camera.ScreenToWorldPoint(Input.mousePosition);
             activeSelectPrefab.transform.position = new Vector3(Mathf.RoundToInt(pos.x), 0, Mathf.RoundToInt(pos.z));
+            if (InputManager.Instance.GetKeyDown("ESC")) BreakCast();
             if (InputManager.Instance.GetKeyDown("CAST")) TryCast(pos);
         }
     }
